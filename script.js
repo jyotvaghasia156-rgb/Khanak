@@ -133,7 +133,7 @@ if (sendOtpBtn) {
             
             setTimeout(() => {
                 otpModal.style.display = 'none';
-                emailInput.disabled = true;
+                emailInput.readOnly = true;
                 
                 // ENABLE THE MAIN SUBMIT BUTTON
                 submitFormBtn.disabled = false;
