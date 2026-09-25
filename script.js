@@ -165,18 +165,36 @@ if (contactForm) {
         e.preventDefault(); // Stop the default warning-prone submission
 
         const formData = new FormData(contactForm);
-        let emailBody = "New Inquiry from Khanak Website:\n\n";
-        
-        formData.forEach((value, key) => {
-            emailBody += `${key}: ${value}\n`;
-        });
+        const submitBtn = document.getElementById('submit-form-btn');
+        const originalText = submitBtn.innerHTML;
 
-        // Safely trigger the email client
-        const subject = encodeURIComponent("New Inquiry: " + formData.get("Full Name"));
-        const body = encodeURIComponent(emailBody);
-        window.location.href = `mailto:khanakdance7@gmail.com?subject=${subject}&body=${body}`;
-        
-        // Show success alert
-        alert("Thank you! Your email client will now open to send your inquiry.");
+        submitBtn.innerText = "Sending...";
+        submitBtn.disabled = true;
+
+        // Build the template parameters based on the instructions
+        const templateParams = {
+            from_name: formData.get("Full Name"),
+            customer_email: formData.get("Email"),
+            phone_number: formData.get("Phone"),
+            event_type: formData.get("Event Type"),
+            event_date: formData.get("Event Date"),
+            location: formData.get("Location"),
+            vision: formData.get("Vision Details")
+        };
+
+        // Send via EmailJS
+        emailjs.send("service_jje0v0l", "template_0kfbres", templateParams)
+            .then(() => {
+                alert("Thank you! Your inquiry has been sent directly to the artist. We will be in touch soon.");
+                contactForm.reset();
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            })
+            .catch((error) => {
+                console.error("Error submitting form:", error);
+                alert("Failed to send inquiry: " + JSON.stringify(error));
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            });
     });
 }
