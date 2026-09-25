@@ -103,7 +103,7 @@ if (sendOtpBtn) {
         generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
 
         // Send Email via EmailJS
-        emailjs.send("service_tsna7iy", "template_w68c7ww", {
+        emailjs.send("service_jje0v0l", "template_w68c7ww", {
             to_email: email,
             otp_code: generatedOTP
         })
