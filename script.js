@@ -152,3 +152,28 @@ if (sendOtpBtn && auth) {
         alert("Firebase is not configured yet! Please update script.js with your Firebase config keys.");
     });
 }
+
+// --------------------------------------------------------
+// SAFE FORM SUBMISSION (Bypasses Browser Security Warning)
+// --------------------------------------------------------
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Stop the default warning-prone submission
+
+        const formData = new FormData(contactForm);
+        let emailBody = "New Inquiry from Khanak Website:\n\n";
+        
+        formData.forEach((value, key) => {
+            emailBody += `${key}: ${value}\n`;
+        });
+
+        // Safely trigger the email client
+        const subject = encodeURIComponent("New Inquiry: " + formData.get("Full Name"));
+        const body = encodeURIComponent(emailBody);
+        window.location.href = `mailto:hello@khanak.com?subject=${subject}&body=${body}`;
+        
+        // Show success alert
+        alert("Thank you! Your email client will now open to send your inquiry.");
+    });
+}
