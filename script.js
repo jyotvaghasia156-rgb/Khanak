@@ -1,8 +1,6 @@
 // --------------------------------------------------------
-// EMAILJS INITIALIZATION
+// UI ANIMATIONS & EFFECTS (Runs First)
 // --------------------------------------------------------
-// TODO: Replace with your actual EmailJS Public Key
-emailjs.init("ExVacF0AKGwRNjnmK");
 
 // Navbar Scroll Effect
 window.addEventListener('scroll', () => {
@@ -21,6 +19,21 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const target = document.querySelector(this.getAttribute('href'));
         if(target) {
             target.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
+
+// Hero Parallax Effect
+document.addEventListener("DOMContentLoaded", () => {
+    const heroBg = document.querySelector('.hero-bg');
+    const heroText = document.querySelector('.hero-content');
+
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        if (heroBg && heroText) {
+            heroBg.style.transform = `translateY(${scrolled * 0.4}px)`;
+            heroText.style.transform = `translateY(${scrolled * 0.2}px)`;
+            heroText.style.opacity = 1 - (scrolled * 0.003);
         }
     });
 });
@@ -48,8 +61,16 @@ window.addEventListener('load', () => {
 });
 
 // --------------------------------------------------------
-// OTP VERIFICATION LOGIC (EmailJS)
+// EMAILJS INITIALIZATION & OTP LOGIC
 // --------------------------------------------------------
+try {
+    if (typeof emailjs !== 'undefined') {
+        emailjs.init("ExVacF0AKGwRNjnmK");
+    }
+} catch (e) {
+    console.error("EmailJS could not be initialized:", e);
+}
+
 const sendOtpBtn = document.getElementById('send-otp-btn');
 const verifyOtpBtn = document.getElementById('verify-otp-btn');
 const emailInput = document.getElementById('email-address');
@@ -63,6 +84,11 @@ let generatedOTP = null;
 
 if (sendOtpBtn) {
     sendOtpBtn.addEventListener('click', () => {
+        if (typeof emailjs === 'undefined') {
+            alert("EmailJS is blocked by your browser. Please disable your adblocker to verify your email.");
+            return;
+        }
+
         const email = emailInput.value.trim();
         
         if (!email || !email.includes('@')) {
