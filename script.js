@@ -115,7 +115,7 @@ if (sendOtpBtn) {
             console.error("Error sending OTP via EmailJS:", error);
             sendOtpBtn.innerText = "Verify Email";
             sendOtpBtn.disabled = false;
-            alert("EmailJS is not configured yet! Please add your keys in script.js.");
+            alert("EmailJS Error: " + JSON.stringify(error));
         });
     });
 
