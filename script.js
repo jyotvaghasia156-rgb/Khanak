@@ -87,20 +87,26 @@ if (sendOtpBtn && auth) {
     });
 
     sendOtpBtn.addEventListener('click', () => {
+        const countryCode = document.getElementById('country-code').value;
         let phoneNumber = phoneInput.value.trim();
         
-        // Auto-add +91 if they forgot it (fixing the bug)
-        if (phoneNumber.length === 10 && !phoneNumber.startsWith('+')) {
-            phoneNumber = "+91" + phoneNumber;
-        } else if (!phoneNumber.startsWith('+')) {
-            alert('Please enter a valid 10-digit phone number.');
+        // Check if user accidentally typed the + code into the text box too
+        if (phoneNumber.startsWith('+')) {
+            alert('Please remove the country code from the text box. Use the dropdown instead!');
             return;
         }
+
+        if (phoneNumber.length < 7) {
+            alert('Please enter a valid phone number.');
+            return;
+        }
+
+        let fullPhoneNumber = countryCode + phoneNumber;
 
         sendOtpBtn.innerText = "Sending...";
         sendOtpBtn.disabled = true;
 
-        signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
+        signInWithPhoneNumber(auth, fullPhoneNumber, window.recaptchaVerifier)
             .then((confirmationResult) => {
                 window.confirmationResult = confirmationResult;
                 confirmationResultObj = confirmationResult;
