@@ -119,7 +119,7 @@ if (sendOtpBtn && auth) {
                 console.error("Error sending OTP:", error);
                 sendOtpBtn.innerText = "Get OTP";
                 sendOtpBtn.disabled = false;
-                alert("Failed to send OTP. Ensure your Firebase keys are correct and the number is valid.");
+                alert("Firebase Error: " + error.message);
             });
     });
 
