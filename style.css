@@ -475,6 +475,49 @@ h1 em {
     border-bottom-color: var(--plum);
 }
 
+/* OTP Elements */
+.otp-group {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.otp-group input {
+    flex: 1;
+}
+
+.btn-verify {
+    background: var(--plum);
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: var(--transition);
+    height: 38px;
+}
+
+.btn-verify:hover {
+    background: var(--text-dark);
+}
+
+.otp-message {
+    font-size: 0.85rem;
+    margin-top: 5px;
+    color: #d9534f; /* Error red by default */
+}
+.otp-message.success {
+    color: #5cb85c; /* Success green */
+}
+
+#recaptcha-container {
+    margin-bottom: 1rem;
+}
+
 .btn-submit {
     background: transparent;
     border: none;

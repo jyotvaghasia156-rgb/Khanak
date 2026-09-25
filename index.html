@@ -160,12 +160,23 @@
                     <form action="mailto:hello@khanak.com" method="post" enctype="text/plain" class="elegant-form">
                         <div class="form-grid">
                             <div class="input-line">
-                                <input type="text" name="Full Name" required placeholder="Full Name">
+                                <input type="text" id="full-name" name="Full Name" required placeholder="Full Name">
                             </div>
-                            <div class="input-line">
-                                <input type="tel" name="Phone" required placeholder="Phone Number">
+                            <div class="input-line otp-group">
+                                <input type="tel" id="phone-number" name="Phone" required placeholder="Phone Number (e.g. +91...)">
+                                <button type="button" id="send-otp-btn" class="btn-verify">Get OTP</button>
                             </div>
                         </div>
+                        
+                        <div class="input-line" id="otp-section" style="display: none;">
+                            <div class="otp-group">
+                                <input type="text" id="otp-code" placeholder="Enter 6-digit OTP">
+                                <button type="button" id="verify-otp-btn" class="btn-verify">Confirm</button>
+                            </div>
+                            <p id="otp-message" class="otp-message"></p>
+                        </div>
+                        
+                        <div id="recaptcha-container"></div>
                         <div class="input-line">
                             <input type="email" name="Email" required placeholder="Email Address">
                         </div>
@@ -190,7 +201,8 @@
                         <div class="input-line">
                             <textarea name="Vision Details" rows="4" required placeholder="Tell us about your vision, the scale of the event, and any specific cultural nuances..."></textarea>
                         </div>
-                        <button type="submit" class="btn-submit">Submit Inquiry <i class="fas fa-arrow-right"></i></button>
+                        <!-- Submit button disabled until verified -->
+                        <button type="submit" id="submit-form-btn" class="btn-submit" disabled style="opacity: 0.5; cursor: not-allowed;">Submit Inquiry <i class="fas fa-arrow-right"></i></button>
                     </form>
                 </div>
             </div>
@@ -203,6 +215,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Firebase SDK (Modular) -->
+    <script type="module" src="script.js"></script>
 </body>
 </html>
