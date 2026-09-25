@@ -518,6 +518,86 @@ h1 em {
     margin-bottom: 1rem;
 }
 
+/* Full Screen OTP Modal */
+.otp-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(250, 246, 240, 0.95); /* Cream background slightly transparent */
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.otp-modal-content {
+    background: #fff;
+    padding: 3rem;
+    border-radius: 8px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+.otp-modal-content h2 {
+    font-family: var(--font-heading);
+    color: var(--plum);
+    margin-bottom: 10px;
+}
+
+.otp-modal-content p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.otp-group-large input {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.5rem;
+    text-align: center;
+    letter-spacing: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.btn-verify-large {
+    background: var(--plum);
+    color: #fff;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-verify-large:hover {
+    background: var(--text-dark);
+}
+
+.btn-cancel {
+    background: transparent;
+    border: none;
+    color: #999;
+    margin-top: 15px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.btn-cancel:hover {
+    color: var(--plum);
+}
+
 .btn-submit {
     background: transparent;
     border: none;

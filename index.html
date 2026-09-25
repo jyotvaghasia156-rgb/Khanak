@@ -163,18 +163,12 @@
                                 <input type="text" id="full-name" name="Full Name" required placeholder="Full Name">
                             </div>
                             <div class="input-line otp-group">
-                                <input type="tel" id="phone-number" name="Phone" required placeholder="Phone Number (e.g. +91...)">
+                                <input type="tel" id="phone-number" name="Phone" required placeholder="Phone Number (e.g. 9876543210)">
                                 <button type="button" id="send-otp-btn" class="btn-verify">Get OTP</button>
                             </div>
                         </div>
                         
-                        <div class="input-line" id="otp-section" style="display: none;">
-                            <div class="otp-group">
-                                <input type="text" id="otp-code" placeholder="Enter 6-digit OTP">
-                                <button type="button" id="verify-otp-btn" class="btn-verify">Confirm</button>
-                            </div>
-                            <p id="otp-message" class="otp-message"></p>
-                        </div>
+                        <div id="recaptcha-container"></div>
                         
                         <div id="recaptcha-container"></div>
                         <div class="input-line">
@@ -214,6 +208,20 @@
             <p>&copy; 2026 Khanak. Crafted with elegance.</p>
         </div>
     </footer>
+
+    <!-- Full Screen OTP Page (Modal) -->
+    <div id="otp-modal" class="otp-modal" style="display: none;">
+        <div class="otp-modal-content">
+            <h2>Verify Your Identity</h2>
+            <p>Please enter the 6-digit secure code sent to your phone.</p>
+            <div class="otp-group-large">
+                <input type="text" id="otp-code" placeholder="Enter OTP" maxlength="6">
+            </div>
+            <button type="button" id="verify-otp-btn" class="btn-verify-large">Verify & Continue</button>
+            <p id="otp-message" class="otp-message"></p>
+            <button type="button" id="close-otp-modal" class="btn-cancel">Cancel</button>
+        </div>
+    </div>
 
     <!-- Firebase SDK (Modular) -->
     <script type="module" src="script.js"></script>

@@ -69,7 +69,8 @@ window.addEventListener('load', () => {
 const sendOtpBtn = document.getElementById('send-otp-btn');
 const verifyOtpBtn = document.getElementById('verify-otp-btn');
 const phoneInput = document.getElementById('phone-number');
-const otpSection = document.getElementById('otp-section');
+const otpModal = document.getElementById('otp-modal');
+const closeOtpModal = document.getElementById('close-otp-modal');
 const otpCodeInput = document.getElementById('otp-code');
 const otpMessage = document.getElementById('otp-message');
 const submitFormBtn = document.getElementById('submit-form-btn');
@@ -86,11 +87,13 @@ if (sendOtpBtn && auth) {
     });
 
     sendOtpBtn.addEventListener('click', () => {
-        const phoneNumber = phoneInput.value.trim();
+        let phoneNumber = phoneInput.value.trim();
         
-        // Basic validation
-        if (!phoneNumber.startsWith('+')) {
-            alert('Please enter your phone number with the country code (e.g., +919876543210)');
+        // Auto-add +91 if they forgot it (fixing the bug)
+        if (phoneNumber.length === 10 && !phoneNumber.startsWith('+')) {
+            phoneNumber = "+91" + phoneNumber;
+        } else if (!phoneNumber.startsWith('+')) {
+            alert('Please enter a valid 10-digit phone number.');
             return;
         }
 
@@ -102,17 +105,15 @@ if (sendOtpBtn && auth) {
                 window.confirmationResult = confirmationResult;
                 confirmationResultObj = confirmationResult;
                 
-                // Show OTP input section
-                otpSection.style.display = 'block';
+                // Show Full Screen OTP Modal!
+                otpModal.style.display = 'flex';
                 sendOtpBtn.innerText = "OTP Sent!";
-                otpMessage.innerText = "Check your phone for the code.";
-                otpMessage.className = "otp-message success";
             })
             .catch((error) => {
                 console.error("Error sending OTP:", error);
                 sendOtpBtn.innerText = "Get OTP";
                 sendOtpBtn.disabled = false;
-                alert("Failed to send OTP. Ensure your Firebase Config is correct and phone number format is valid.");
+                alert("Failed to send OTP. Ensure your Firebase keys are correct and the number is valid.");
             });
     });
 
@@ -125,26 +126,33 @@ if (sendOtpBtn && auth) {
 
         confirmationResultObj.confirm(code).then((result) => {
             // User successfully verified
-            const user = result.user;
-            otpMessage.innerText = "✅ Phone number verified successfully!";
+            otpMessage.innerText = "✅ Verified successfully!";
             otpMessage.className = "otp-message success";
             
-            // Disable OTP inputs
-            otpCodeInput.disabled = true;
-            phoneInput.disabled = true;
-            verifyOtpBtn.style.display = 'none';
+            // Close modal after 1 second
+            setTimeout(() => {
+                otpModal.style.display = 'none';
+                phoneInput.disabled = true;
+                
+                // ENBLE THE MAIN SUBMIT BUTTON
+                submitFormBtn.disabled = false;
+                submitFormBtn.style.opacity = '1';
+                submitFormBtn.style.cursor = 'pointer';
+            }, 1000);
 
-            // ENBLE THE MAIN SUBMIT BUTTON
-            submitFormBtn.disabled = false;
-            submitFormBtn.style.opacity = '1';
-            submitFormBtn.style.cursor = 'pointer';
         }).catch((error) => {
             console.error("Invalid OTP:", error);
             otpMessage.innerText = "❌ Invalid OTP. Try again.";
             otpMessage.className = "otp-message";
-            verifyOtpBtn.innerText = "Confirm";
+            verifyOtpBtn.innerText = "Verify & Continue";
             verifyOtpBtn.disabled = false;
         });
+    });
+
+    closeOtpModal.addEventListener('click', () => {
+        otpModal.style.display = 'none';
+        sendOtpBtn.innerText = "Get OTP";
+        sendOtpBtn.disabled = false;
     });
 } else if (sendOtpBtn && !auth) {
     // Fallback if Firebase isn't configured yet
