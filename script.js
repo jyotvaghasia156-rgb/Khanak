@@ -148,7 +148,7 @@ if (contactForm) {
         // Safely trigger the email client
         const subject = encodeURIComponent("New Inquiry: " + formData.get("Full Name"));
         const body = encodeURIComponent(emailBody);
-        window.location.href = `mailto:hello@khanak.com?subject=${subject}&body=${body}`;
+        window.location.href = `mailto:khanakdance7@gmail.com?subject=${subject}&body=${body}`;
         
         // Show success alert
         alert("Thank you! Your email client will now open to send your inquiry.");
