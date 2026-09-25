@@ -2,7 +2,7 @@
 // EMAILJS INITIALIZATION
 // --------------------------------------------------------
 // TODO: Replace with your actual EmailJS Public Key
-emailjs.init("YOUR_PUBLIC_KEY");
+emailjs.init("ExVacF0AKGwRNjnmK");
 
 // Navbar Scroll Effect
 window.addEventListener('scroll', () => {
@@ -77,7 +77,7 @@ if (sendOtpBtn) {
         generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
 
         // Send Email via EmailJS
-        emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+        emailjs.send("service_tsna7iy", "template_w68c7ww", {
             to_email: email,
             otp_code: generatedOTP
         })
