@@ -158,22 +158,21 @@
                 
                 <div class="contact-form-container" id="book-now">
                     <form id="contact-form" class="elegant-form">
-                        <div class="form-grid">
-                            <div class="input-line">
-                                <input type="text" id="full-name" name="Full Name" required placeholder="Full Name">
-                            </div>
-                            <div class="input-line otp-group">
-                                <select id="country-code" name="Country Code" class="elegant-select" style="width: 100px; padding: 5px; flex-shrink: 0; border: none; border-bottom: 1px solid var(--plum);">
-                                    <option value="+91" selected>+91 (IN)</option>
-                                    <option value="+1">+1 (US)</option>
-                                    <option value="+44">+44 (UK)</option>
-                                    <option value="+61">+61 (AU)</option>
-                                    <option value="+971">+971 (AE)</option>
-                                    <option value="+65">+65 (SG)</option>
-                                </select>
-                                <input type="tel" id="phone-number" name="Phone" required placeholder="Phone Number">
-                                <button type="button" id="send-otp-btn" class="btn-verify">Get OTP</button>
-                            </div>
+                        <div class="input-line">
+                            <input type="text" id="full-name" name="Full Name" required placeholder="Full Name">
+                        </div>
+                        
+                        <div class="input-line otp-group" style="margin-bottom: 2rem;">
+                            <select id="country-code" name="Country Code" class="elegant-select" style="width: 100px; padding: 5px; flex-shrink: 0; border: none; border-bottom: 1px solid var(--plum); background: transparent;">
+                                <option value="+91" selected>+91 (IN)</option>
+                                <option value="+1">+1 (US)</option>
+                                <option value="+44">+44 (UK)</option>
+                                <option value="+61">+61 (AU)</option>
+                                <option value="+971">+971 (AE)</option>
+                                <option value="+65">+65 (SG)</option>
+                            </select>
+                            <input type="tel" id="phone-number" name="Phone" required placeholder="Phone Number" style="flex: 1; border: none; border-bottom: 1px solid var(--plum); background: transparent;">
+                            <button type="button" id="send-otp-btn" class="btn-verify">Get OTP</button>
                         </div>
                         
                         <div id="recaptcha-container"></div>
